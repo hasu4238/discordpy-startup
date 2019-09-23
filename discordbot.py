@@ -8,6 +8,12 @@ import traceback
 client = commands.Bot(command_prefix='/')
 token = os.environ['DISCORD_BOT_TOKEN']
 
+@client.event
+async def on_ready():
+    print('Logged in as')
+    print(client.user.name)
+    print(client.user.id)
+    print('------')
 
 #@client.event
 #async def on_command_error(ctx, error):
@@ -17,13 +23,6 @@ token = os.environ['DISCORD_BOT_TOKEN']
 @client.command()
 async def ping(ctx):
     await ctx.send('pong')
-    
-@client.event
-async def on_ready():
-    print('Logged in as')
-    print(client.user.name)
-    print(client.user.id)
-    print('------')
 
 @client.command()
 async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
