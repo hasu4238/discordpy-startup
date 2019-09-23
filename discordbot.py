@@ -22,7 +22,7 @@ async def on_ready():
 
 @client.command()
 async def ping(ctx):
-    await ctx.send('pong')
+    await ctx.send('pong2')
 
 @client.command()
 async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
