@@ -4,18 +4,24 @@ from discord.ext import commands
 import os
 import traceback
 
-bot = commands.Bot(command_prefix='/')
+client = commands.Bot(command_prefix='/')
 token = os.environ['DISCORD_BOT_TOKEN']
 
+@client.event
+async def on_ready():
+    print('Logged in as')
+    print(client.user.name)
+    print(client.user.id)
+    print('------')
 
-@bot.event
+@client.event
 async def on_command_error(ctx, error):
     await ctx.send(str(error))
 
 
-@bot.command()
+@client.command()
 async def ping(ctx):
     await ctx.send('po2ng')
 
 
-bot.run(token)
+client.run(token)
