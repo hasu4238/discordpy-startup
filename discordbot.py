@@ -24,7 +24,7 @@ async def ping(ctx):
     await ctx.send('po2ng')
     
 @client.command()
-async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
+async def rect(ctx, about = "募集", cnt = 5, settime = 21600‬.0):
     cnt, settime = int(cnt), float(settime)
     reaction_member = [">>>"]
     test = discord.Embed(title=about,colour=0x1e90ff)
@@ -45,7 +45,7 @@ async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
         try:
             reaction, user = await client.wait_for('reaction_add', timeout=settime, check=check)
         except asyncio.TimeoutError:
-            await ctx.send('残念、人が足りなかったようだ...')
+            await ctx.send('募集開始から360分経過したのでクローズします')
             break
         else:
             print(str(reaction.emoji))
