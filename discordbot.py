@@ -31,7 +31,7 @@ async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
     test.add_field(name=f"あと{cnt}人 募集中\n", value=None, inline=True)
     msg = await ctx.send(embed=test)
     #投票の欄
-    await msg.add_reaction('⏫')
+    await msg.add_reaction('U+23CF')
     await msg.add_reaction('✖')
 
     def check(reaction, user):
