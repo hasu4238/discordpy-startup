@@ -43,4 +43,3 @@ async def poll(ctx, about = "question", *args):
         await ctx.send("項目数上限オーバー")
 
 client.run(token)
-bot.run(token)
