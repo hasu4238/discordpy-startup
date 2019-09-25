@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 import os
 import traceback
 
-bot = commands.Bot(command_prefix='.')
+bot = commands.Bot(command_prefix='/')
 client = discord.Client()
 token = os.environ['DISCORD_BOT_TOKEN']
 
