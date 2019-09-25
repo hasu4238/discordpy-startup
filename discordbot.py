@@ -31,7 +31,7 @@ async def poll(ctx, about = "question", *args):
     emojis = ["1⃣","2⃣","3⃣","4⃣","5️⃣","6️⃣","7️⃣"]
 
     cnt = len(args)
-    message = discord.Embed(title=":speech_balloon: "+about,colour=0x1e90ff)
+    message = discord.Embed(title=":speech_balloon:アンケートです。 "+about,colour=0x1e90ff)
     if cnt <= len(emojis):
         for a in range(cnt):
             message.add_field(name=f'{emojis[a]}{args[a]}', value="** **", inline=False)
