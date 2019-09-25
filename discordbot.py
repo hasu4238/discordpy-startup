@@ -1,29 +1,36 @@
 import discord, asyncio
 from discord.ext import commands
+from datetime import datetime, timedelta
 
 import os
 import traceback
 
-client = commands.Bot(command_prefix='/')
+bot = commands.Bot(command_prefix='/')
+client = discord.Client()
 token = os.environ['DISCORD_BOT_TOKEN']
-
-@client.event
-async def on_ready():
-    print('Logged in as')
-    print(client.user.name)
-    print(client.user.id)
-    print('------')
 
 @client.event
 async def on_command_error(ctx, error):
     await ctx.send(str(error))
 
 
-@client.command()
+@bot.command()
 async def ping(ctx):
     await ctx.send('po2ng')
     
-@client.command()
+@client.event
+async def on_voice_state_update(member, before, after): 
+    if member.guild.id == 監視するサーバーid and (before.channel != after.channel):
+        now = datetime.utcnow() + timedelta(hours=9)
+        alert_channel = client.get_channel(通知させたいテキストチャンネルid)
+        if before.channel is None: 
+            msg = f'{now:%m/%d-%H:%M} に {member.name} が {after.channel.name} に参加しました。'
+            await alert_channel.send(msg)
+        elif after.channel is None: 
+            msg = f'{now:%m/%d-%H:%M} に {member.name} が {before.channel.name} から退出しました。'
+            await alert_channel.send(msg)
+    
+@bot.command()
 async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
     cnt, settime = int(cnt), float(settime)
     reaction_member = [">>>"]
@@ -75,6 +82,7 @@ async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
                     pass
         # リアクション消す。メッセージ管理権限がないとForbidden:エラーが出ます。
        # await msg.remove_reaction(str(reaction.emoji), user)
+
 
 
 client.run(token)
