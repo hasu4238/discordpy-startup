@@ -5,8 +5,6 @@ from datetime import datetime, timedelta
 import os
 import traceback
 
-bot = commands.Bot(command_prefix='.')
-client = discord.Client()
 token = os.environ['DISCORD_BOT_TOKEN']
 
 client = discord.Client()
@@ -26,20 +24,6 @@ async def on_voice_state_update(member, before, after):
             
 
 
-@bot.command()
-async def poll(ctx, about = "question", *args):
-    emojis = ["1⃣","2⃣","3⃣","4⃣","5️⃣","6️⃣","7️⃣"]
 
-    cnt = len(args)
-    message = discord.Embed(title=":speech_balloon:アンケートです。 "+about,colour=0x1e90ff)
-    if cnt <= len(emojis):
-        for a in range(cnt):
-            message.add_field(name=f'{emojis[a]}{args[a]}', value="** **", inline=False)
-        msg = await ctx.send(embed=message)
-        #投票の欄
-        for i in range(cnt):
-            await msg.add_reaction(emojis[i])
-    else:
-        await ctx.send("項目数上限オーバー")
 
 client.run(token)
